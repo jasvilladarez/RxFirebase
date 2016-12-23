@@ -21,9 +21,6 @@ import com.google.firebase.database.*
 import rx.Observable
 import rx.subscriptions.Subscriptions
 
-/***
- *
- */
 fun <T> Query.observeListOf(classType: Class<T>): Observable<List<T>> {
     return Observable.create<DataSnapshot> { subscriber ->
         val listener = addValueEventListener(object : ValueEventListener {
