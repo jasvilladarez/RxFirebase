@@ -48,4 +48,4 @@ obj/
 #Google
 app/google-services.json
 
-secret.gradle
+publish.gradle
