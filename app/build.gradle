@@ -1,5 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'maven-publish'
+apply from: 'publish.gradle'
 
 android {
     compileSdkVersion 25
@@ -8,8 +10,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        versionName versionName
     }
     buildTypes {
         release {
@@ -24,7 +25,11 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    compile 'com.google.firebase:firebase-database:10.0.1'
+    compile 'io.reactivex:rxkotlin:0.60.0'
 
 }
 repositories {
