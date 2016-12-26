@@ -21,6 +21,7 @@ import com.google.firebase.database.*
 import rx.Observable
 import rx.subscriptions.Subscriptions
 
+
 fun <T> Query.observeListOf(classType: Class<T>): Observable<List<T>> {
     return Observable.create<DataSnapshot> { subscriber ->
         val listener = addValueEventListener(object : ValueEventListener {
@@ -39,7 +40,7 @@ fun <T> Query.observeListOf(classType: Class<T>): Observable<List<T>> {
     }
 }
 
-fun <T> Query.observeChildren(classType: Class<T>) : Observable<ChildEvent<T>> {
+fun <T> Query.observeChildren(classType: Class<T>): Observable<ChildEvent<T>> {
     return Observable.create { subscriber ->
         val listener = addChildEventListener(object : ChildEventListener {
             override fun onChildMoved(dataSnapshot: DataSnapshot, prevName: String) {
@@ -72,9 +73,25 @@ fun <T> Query.observeChildren(classType: Class<T>) : Observable<ChildEvent<T>> {
     }
 }
 
-data class ChildEvent<out T> (
+fun <T> Query.observe(classType: Class<T>): Observable<T> {
+    return Observable.create { subscriber ->
+        val listener = addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                subscriber.onNext(dataSnapshot.getValue(classType))
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                subscriber.onError(FirebaseException(error.message))
+            }
+        })
+
+        Subscriptions.create { removeEventListener(listener) }
+    }
+}
+
+data class ChildEvent<out T>(
         val event: EventType,
-        val child: T){
+        val child: T) {
 
     enum class EventType {
         CHILD_ADDED, CHILD_MOVED, CHILD_CHANGED, CHILD_REMOVED
