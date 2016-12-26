@@ -20,8 +20,6 @@ Above code returns `Observable<List<Sample>>`
 	compile 'io.github.jasvilladarez:rxfirebase:0.2.0'
 }```
 
-Add the following to your repositories
-
 # License
 Copyright 2016 Jasmine Villadarez
 
