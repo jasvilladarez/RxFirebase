@@ -1,4 +1,26 @@
 # RxFirebase
+A wrapper for Google's Firebase library.
+
+# Usage
+### Kotlin
+```
+FirebaseDatabase.getInstance().reference.observeListOf(Sample::class.java)
+```
+Above code returns `Observable<List<Sample>>`
+
+### Java
+```
+RxFirebaseDatabaseKt.observeListOf(FirebaseDatabase.getInstance().getReference(),
+Sample.class)
+```
+Above code returns `Observable<List<Sample>>`
+
+# Download
+``` dependencies {
+	compile 'io.github.jasvilladarez:rxfirebase:0.2.0'
+}```
+
+Add the following to your repositories
 
 # License
 Copyright 2016 Jasmine Villadarez
