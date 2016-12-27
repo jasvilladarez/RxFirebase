@@ -1,7 +1,14 @@
 # RxFirebase
-A wrapper for Google's Firebase library.
+A wrapper for Google's Firebase Realtime Database library. It uses Kotlin to create extension functions for Queries.
 
 # Usage
+RxFirebase has 3 functions:
+* `observe(T.class)` returns `Observable<T>`
+* `observeListOf(T.class)` returns `Observalbe<List<T>>`
+* `observeChildrenOf(T.class)` return `Observable<T>`
+
+All these functions create an observable with Firebase Event listeners that gets removed when the subscriber unsubscribes. Both `observe` and `observeListOf` use Firebase's `ValueEventListener`, thus, every change made to a query is caught in `onNext` function of the subscriber. On the other hand, `observeChildrenOf`, uses Firebase's `ChildEventListener`, thus, every change made to the children of the query is caught in `onNext` function of the subscriber.
+
 ### Kotlin
 ```
 FirebaseDatabase.getInstance().reference.observeListOf(Sample::class.java)
@@ -10,10 +17,15 @@ Above code returns `Observable<List<Sample>>`
 
 ### Java
 ```
-RxFirebaseDatabaseKt.observeListOf(FirebaseDatabase.getInstance().getReference(),
+RxFirebaseDatabaseKt.observe(FirebaseDatabase.getInstance().getReference(),
 Sample.class)
 ```
-Above code returns `Observable<List<Sample>>`
+Above code returns `Observable<Sample>`
+
+You can also view the sample app I made using this library here:
+```
+https://github.com/jasvilladarez/Kotlin_Practice/tree/feature/firebase/Notes
+```
 
 # Download
 ``` dependencies {
