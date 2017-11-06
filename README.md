@@ -29,8 +29,15 @@ https://github.com/jasvilladarez/Kotlin_Practice/tree/feature/firebase/Notes
 
 # Download
 ``` 
+allprojects {
+	repositories {
+		...
+		maven { url 'https://jitpack.io' }
+	}
+}
+
 dependencies {
-	compile 'io.github.jasvilladarez:rxfirebase:0.2.0'
+        compile 'com.github.jasvilladarez:rxfirebase:0.2.0'
 }
 ```
 
