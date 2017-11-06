@@ -28,9 +28,11 @@ https://github.com/jasvilladarez/Kotlin_Practice/tree/feature/firebase/Notes
 ```
 
 # Download
-``` dependencies {
+``` 
+dependencies {
 	compile 'io.github.jasvilladarez:rxfirebase:0.2.0'
-}```
+}
+```
 
 # License
 Copyright 2016 Jasmine Villadarez
